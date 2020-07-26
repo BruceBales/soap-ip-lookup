@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"strings"
 )
 
 type Response struct {
@@ -24,16 +23,14 @@ func main() {
 
 	reqip := os.Args[1]
 
-	var reqbod = strings.TrimSpace(fmt.Sprintf(`
-	<?xml version="1.0" encoding="utf-8"?>
+	var reqbod = fmt.Sprintf(`<?xml version="1.0" encoding="utf-8"?>
 	<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 	  <soap:Body>
 		<GetIpLocation xmlns="http://lavasoft.com/">
 		  <sIp>%s</sIp>
 		</GetIpLocation>
 	  </soap:Body>
-	</soap:Envelope>
-	`, reqip))
+	</soap:Envelope>`, reqip)
 	//76.178.173.88
 	soapyboi := new(Response)
 
